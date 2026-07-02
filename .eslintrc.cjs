@@ -38,6 +38,8 @@ module.exports = {
   ],
   rules: {
     // JS
+        'prettier/prettier': 'error',
+
     'semi': 'off',
     '@typescript-eslint/semi': ['error', 'always'],
     'prefer-const': 2,

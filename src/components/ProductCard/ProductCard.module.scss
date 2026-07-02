@@ -1,0 +1,216 @@
+// Головний блок універсальної картки
+.product-card {
+  width: 272px;
+  height: 506px;
+  border-radius: 8px;
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  padding: 32px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  transition:  box-shadow 0.3s ease, border-color 0.3s ease;
+
+
+  // Ефект виділення картки при наведенні
+  &:hover {
+    box-shadow: 0px 2px 4px var(--color-secondary);
+
+  }
+
+  &__image-link,
+  &__title-link {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  // Контейнер для фото смартфона
+  &__image-container {
+    width: 100%;
+    height: 196px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 8px;
+    overflow: hidden;
+     transition: transform 0.3s ease;
+
+
+    &:hover{
+      transform: scale(1.09);
+    }
+  }
+
+  // Сама картинка
+  &__image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+
+  }
+
+  // Назва телефону (Title)
+  &__title {
+    font-family: 'Mont', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 21px;
+    color: var(--color-primary);
+    margin: 24px 0 8px 0;
+    height: 42px;
+    overflow: hidden;
+    letter-spacing: 0%;
+
+
+  }
+
+  // Блок цін (Price)
+  &__price-block {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  &__price {
+    font-family: var(--font-main);
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 140%;
+    color: var(--color-primary);
+  }
+
+  &__old-price {
+    font-family: var(--font-main);
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 100%;
+    color: var(--color-secondary);
+    text-decoration: line-through;
+  }
+
+  // Тонка лінія-розділювач (Divider)
+  &__divider {
+    height: 1px;
+    background-color: var(--color-border);
+    border: 1px solid var(--color-border);
+    margin-bottom: 8px;
+    width: 100%;
+  }
+
+  // Контейнер для всього блоку характеристик (Specs у Figma)
+  &__specs {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  // Один рядок (наприклад, Screen + 4.7" IPS)
+  &__spec-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--font-main);
+    font-size: 12px;
+    line-height: 100%;
+    font-weight: 600;
+  }
+
+  // Назва характеристики (сірий текст зліва)
+  &__spec-label {
+    font-weight: 600;
+    color: var(--color-secondary);
+  }
+
+  // Значення характеристики (текст справа під тему)
+  &__spec-value {
+    font-weight: 600;
+    color: var(--color-primary);
+  }
+
+  // Контейнер-обертка для кнопок (Buttons по Figma)
+  &__buttons {
+    display: flex;
+    gap: 8px;
+    margin-top: auto;
+    width: 100%;
+  }
+
+  // Велика кнопка Add to cart
+  &__btn-cart {
+    border-radius:  48px;
+    flex-grow: 1;
+    height: 40px;
+    background-color: #a378ff;
+    color: var(--color-bg);
+    border: none;
+    line-height: 21px;
+    font-family: var(--font-main);
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+
+    &:hover {
+      background-color: #905eff;
+      box-shadow: 0px 4px 12px rgba(163, 120, 255, 0.3);
+      transform: scale(1.03);
+    }
+
+    // Модифікатор для стану Added (повернули назву класу на місце)
+    &--selected {
+      background-color: transparent;
+      color: #27ae60;
+      border: 1px solid var(--color-border);
+      cursor: default;
+      box-shadow: none;
+
+      &:hover {
+        background-color: transparent;
+        box-shadow: none;
+      }
+    }
+  }
+
+  // Квадратна кнопка-сердечко (Favorites)
+  &__btn-fav {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+    border: 1px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: border-color 0.3s ease, background-color 0.3s ease ,transform 0.3s ease;
+
+    &:hover {
+      border-color: var(--color-primary);
+      transform: scale(1.02);
+    }
+
+    &--active {
+      border-color: var(--color-border);
+      background-color: var(--color-surface);
+    }
+  }
+
+  // Опис параметрів іконки серця всередині кнопки
+  &__icon-heart {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+
+    // Робимо звичайне сіре серце білим у темній темі
+    [data-theme='dark'] & {
+      filter: invert(1);
+    }
+
+    // Скасовуємо інверсію для червоного серця, якщо у кнопки є клас активності
+    [data-theme='dark'] .product-card__btn-fav--active & {
+      filter: none;
+    }
+  }
+}
